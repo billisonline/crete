@@ -2,7 +2,9 @@
 
 namespace BYanelli\Numerate;
 
-abstract class Enum
+use Illuminate\Contracts\Support\Arrayable;
+
+abstract class Enum implements Arrayable, \ArrayAccess
 {
     protected static $__constants = [];
 
@@ -113,6 +115,58 @@ abstract class Enum
         }
     }
 
+    public static function canMake($val): bool
+    {
+        return (
+            (
+                is_object($val)
+                && (get_class($val) == static::class)
+            )
+            || (
+                is_object($val)
+                && ($val instanceof Enumable)
+                && (get_class($val->toEnum()) == static::class)
+            )
+            || (
+                is_string($val)
+                && in_array($val, array_keys(static::getConstants()))
+            )
+            || (
+                is_int($val)
+                && in_array($val, static::getConstants())
+            )
+        );
+    }
+
+    protected static function newCollection(iterable $items): EnumCollection
+    {
+        return new EnumCollection($items, static::class);
+    }
+
+    /**
+     * @param iterable $list
+     * @return static[]|EnumCollection
+     */
+    public static function makeList(iterable $list): EnumCollection
+    {
+        return static::newCollection($list);
+    }
+
+    /**
+     * @return static[]|EnumCollection
+     * @throws \Exception
+     */
+    public static function all(): EnumCollection
+    {
+        return static::makeList(static::getConstants());
+    }
+
+    // todo: dynamically proxy collection methods
+    public static function contains($key, $operator = null, $value = null): bool
+    {
+        return static::all()->contains($key, $operator, $value);
+    }
+
     /**
      * @param array $constants
      * @param int $id
@@ -208,5 +262,33 @@ abstract class Enum
     {
         $this->name = $other->getName();
         $this->id = $other->getId();
+    }
+
+    public function toArray()
+    {
+        return [
+            'name'  => $this->getName(),
+            'value' => $this->getId(),
+        ];
+    }
+
+    public function offsetExists($offset)
+    {
+        return isset($this->toArray()[$offset]);
+    }
+
+    public function offsetGet($offset)
+    {
+        return $this->toArray()[$offset];
+    }
+
+    public function offsetSet($offset, $value)
+    {
+        throw new \Exception('Enums are read only');
+    }
+
+    public function offsetUnset($offset)
+    {
+        throw new \Exception('Enums are read only');
     }
 }
