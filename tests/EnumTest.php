@@ -160,48 +160,6 @@ class EnumTest extends TestCase
         $this->assertEquals('Zebra', strval($zebra));
     }
 
-    public function testGetAllEnumValues()
-    {
-        $animals = Animal::all();
-
-        $this->assertCount(3, $animals);
-    }
-
-    public function testCheckEnumCollectionContainsValue()
-    {
-        $animals = Animal::all();
-        $zebra = Animal::make(Animal::Zebra);
-        $feldspar = Mineral::make(Mineral::Feldspar);
-
-        $this->assertTrue($animals->contains(Animal::Zebra));
-        $this->assertTrue($animals->contains('Zebra'));
-        $this->assertTrue($animals->contains($zebra));
-
-        $this->assertFalse($animals->contains($feldspar));
-
-        $this->assertTrue($animals->contains(function (Animal $animal) {
-            return $animal->getName() == 'Giraffe';
-        }));
-
-        $this->assertTrue($animals->contains('value', Animal::Meerkat));
-
-        $this->assertTrue(Animal::contains('Zebra'));
-    }
-
-    public function testCannotInstantiateEnumCollectionWithWrongClass()
-    {
-        $this->expectException(\Exception::class);
-
-        new EnumCollection([], ZooAnimal::class);
-    }
-
-    public function testCannotCallEnumCollectionMakeStaticMethod()
-    {
-        $this->expectException(\Exception::class);
-
-        EnumCollection::make();
-    }
-
     public function testCannotSetEnumArrayKey()
     {
         $this->expectException(\Exception::class);
@@ -209,7 +167,6 @@ class EnumTest extends TestCase
         $zebra = Animal::make(Animal::Zebra);
 
         $zebra['stripes'] = true;
-
     }
 
     public function testCannotUnsetEnumArrayKey()

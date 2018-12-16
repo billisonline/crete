@@ -3,7 +3,19 @@
 namespace BYanelli\Numerate;
 
 use Illuminate\Contracts\Support\Arrayable;
+use Illuminate\Support\Collection;
 
+/**
+ * @method static avg($callback = null)
+ * @method static average($callback = null)
+ * @method static median($key = null)
+ * @method static mode($key = null)
+ * @method static contains($key, $operator = null, $value = null)
+ * @method static containsStrict($key, $value = null)
+ * @method static crossJoin(...$lists)
+ * @method static dd(...$args)
+ * @method static filter($callback = null)
+ */
 abstract class Enum implements Arrayable, \ArrayAccess
 {
     protected static $__constants = [];
@@ -115,41 +127,31 @@ abstract class Enum implements Arrayable, \ArrayAccess
         }
     }
 
-    public static function canMake($val): bool
-    {
-        return (
-            (
-                is_object($val)
-                && (get_class($val) == static::class)
-            )
-            || (
-                is_object($val)
-                && ($val instanceof Enumable)
-                && (get_class($val->toEnum()) == static::class)
-            )
-            || (
-                is_string($val)
-                && in_array($val, array_keys(static::getConstants()))
-            )
-            || (
-                is_int($val)
-                && in_array($val, static::getConstants())
-            )
-        );
-    }
-
     protected static function newCollection(iterable $items): EnumCollection
     {
-        return new EnumCollection($items, static::class);
+        return new EnumCollection($items);
     }
 
     /**
-     * @param iterable $list
+     * @param $list
      * @return static[]|EnumCollection
+     * @throws \Exception
      */
-    public static function makeList(iterable $list): EnumCollection
+    public static function collect($list): EnumCollection
     {
-        return static::newCollection($list);
+        $list = (
+            (is_iterable($list))
+                ? $list
+                : func_get_args()
+        );
+
+        $enums = [];
+
+        foreach ($list as $item) {
+            $enums[] = static::make($item);
+        }
+
+        return static::newCollection($enums);
     }
 
     /**
@@ -158,13 +160,7 @@ abstract class Enum implements Arrayable, \ArrayAccess
      */
     public static function all(): EnumCollection
     {
-        return static::makeList(static::getConstants());
-    }
-
-    // todo: dynamically proxy collection methods
-    public static function contains($key, $operator = null, $value = null): bool
-    {
-        return static::all()->contains($key, $operator, $value);
+        return static::collect(array_values(static::getConstants()));
     }
 
     /**
@@ -267,8 +263,8 @@ abstract class Enum implements Arrayable, \ArrayAccess
     public function toArray()
     {
         return [
+            'id'    => $this->getId(),
             'name'  => $this->getName(),
-            'value' => $this->getId(),
         ];
     }
 
@@ -290,5 +286,10 @@ abstract class Enum implements Arrayable, \ArrayAccess
     public function offsetUnset($offset)
     {
         throw new \Exception('Enums are read only');
+    }
+
+    public static function __callStatic($name, $arguments)
+    {
+        return static::all()->{$name}(...$arguments);
     }
 }
