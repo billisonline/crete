@@ -149,7 +149,7 @@ Analogous to the `isEnum()` method above (see the "Strict enum comparisons" sect
 ```php
 $animalsExceptMeerkat->contains(Mineral::Feldspar); // true
 
-$animalsExceptMeerket->containsStrict(Mineral::Feldspar); // false
+$animalsExceptMeerkat->containsStrict(Mineral::Feldspar); // false
 ```
 
 ## Authors
