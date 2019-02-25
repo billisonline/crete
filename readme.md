@@ -1,5 +1,7 @@
 # Crete
 
+![Travis CI build status](https://api.travis-ci.org/billisonline/crete.svg?branch=master)
+
 Enums for PHP
 
 ## Getting Started
