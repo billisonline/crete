@@ -1,6 +1,6 @@
 <?php
 
-namespace BYanelli\Numerate;
+namespace BYanelli\Crete;
 
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Support\Collection;

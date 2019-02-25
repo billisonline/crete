@@ -1,10 +1,10 @@
 <?php
 
-namespace BYanelli\Numerate\Tests;
+namespace BYanelli\Crete\Tests;
 
-use BYanelli\Numerate\Tests\Library\Animal;
-use BYanelli\Numerate\Tests\Library\Mineral;
-use BYanelli\Numerate\Tests\Library\Vegetable;
+use BYanelli\Crete\Tests\Library\Animal;
+use BYanelli\Crete\Tests\Library\Mineral;
+use BYanelli\Crete\Tests\Library\Vegetable;
 use PHPUnit\Framework\TestCase;
 
 class EnumCollectionTest extends TestCase

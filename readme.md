@@ -25,9 +25,9 @@ phpunit
 An enum is a class extending `Enum`, with a set of unique integer constants. The value of each constant *must* be a unique integer.
 
 ```php
-use \BYanelli\Numerate\Enum;
+use \BYanelli\Crete\Enum;
 
-class Animal extends \BYanelli\Numerate\Enum
+class Animal extends \BYanelli\Crete\Enum
 {
     const Zebra = 1;
     const Giraffe = 2;

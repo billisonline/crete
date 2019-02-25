@@ -1,8 +1,8 @@
 <?php
 
-namespace BYanelli\Numerate\Tests\Library;
+namespace BYanelli\Crete\Tests\Library;
 
-use BYanelli\Numerate\Enum;
+use BYanelli\Crete\Enum;
 
 class Animal extends Enum
 {

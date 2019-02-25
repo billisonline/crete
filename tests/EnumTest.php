@@ -1,15 +1,15 @@
 <?php
 
-namespace BYanelli\Numerate\Tests;
+namespace BYanelli\Crete\Tests;
 
-use BYanelli\Numerate\EnumCollection;
-use BYanelli\Numerate\Tests\Library\Animal;
-use BYanelli\Numerate\Tests\Library\InvalidAnimal;
-use BYanelli\Numerate\Tests\Library\InvalidMineral;
-use BYanelli\Numerate\Tests\Library\InvalidVegetable;
-use BYanelli\Numerate\Tests\Library\Mineral;
-use BYanelli\Numerate\Tests\Library\Vegetable;
-use BYanelli\Numerate\Tests\Library\ZooAnimal;
+use BYanelli\Crete\EnumCollection;
+use BYanelli\Crete\Tests\Library\Animal;
+use BYanelli\Crete\Tests\Library\InvalidAnimal;
+use BYanelli\Crete\Tests\Library\InvalidMineral;
+use BYanelli\Crete\Tests\Library\InvalidVegetable;
+use BYanelli\Crete\Tests\Library\Mineral;
+use BYanelli\Crete\Tests\Library\Vegetable;
+use BYanelli\Crete\Tests\Library\ZooAnimal;
 use PHPUnit\Framework\TestCase;
 
 class EnumTest extends TestCase

@@ -1,9 +1,9 @@
 <?php
 
-namespace BYanelli\Numerate\Tests\Library;
+namespace BYanelli\Crete\Tests\Library;
 
-use BYanelli\Numerate\Enum;
-use BYanelli\Numerate\Enumable;
+use BYanelli\Crete\Enum;
+use BYanelli\Crete\Enumable;
 
 class ZooAnimal implements Enumable
 {

@@ -1,5 +1,5 @@
 {
-    "name": "billisonline/numerate",
+    "name": "billisonline/crete",
     "description": "Enums for PHP",
     "type": "library",
     "license": "MIT",
@@ -17,8 +17,8 @@
     },
     "autoload": {
         "psr-4": {
-            "BYanelli\\Numerate\\": "src/",
-            "BYanelli\\Numerate\\Tests\\": "tests/"
+            "BYanelli\\Crete\\": "src/",
+            "BYanelli\\Crete\\Tests\\": "tests/"
         }
     },
     "require-dev": {

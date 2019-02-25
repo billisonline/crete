@@ -1,6 +1,6 @@
 <?php
 
-namespace BYanelli\Numerate;
+namespace BYanelli\Crete;
 
 interface Enumable
 {
